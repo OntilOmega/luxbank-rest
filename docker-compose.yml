@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  app:
+    image: 'lux-bank-rest:latest'
+    build:
+      context: .
+    container_name: lux-bank-rest-app
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/lux-bank
+      - SPRING_DATASOURCE_USERNAME=luxbank
+      - SPRING_DATASOURCE_PASSWORD=LuxBank@2022
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=validate
+    ports:
+      - "8000:8888"
+
+  db:
+    image: 'postgres:13.1-alpine'
+    container_name: lux-bank-db
+    environment:
+      - POSTGRES_USER=luxbank
+      - POSTGRES_PASSWORD=LuxBank@2022
+      - POSTGRES_DB=lux-bank
+    ports:
+      - "55000:5432"
+
