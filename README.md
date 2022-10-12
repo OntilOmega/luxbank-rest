@@ -12,6 +12,11 @@ Scripts to initialize the database are in the project resources folder and run a
  - [schema.sql](src/main/resources/schema.sql)
  - [data.sql](src/main/resources/data.sql)
 
+### Prerequirements
+
+1. Java
+2. Git
+3. Docker
 
 ### How to run the project
 1. Go to folder where you want to clone the project
