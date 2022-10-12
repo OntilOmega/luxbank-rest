@@ -8,7 +8,7 @@ The application is already up and running on Internet in AWS EC2 instance on add
 - [API](http://ec2-52-41-94-64.us-west-2.compute.amazonaws.com)
 - [Swagger](http://ec2-52-41-94-64.us-west-2.compute.amazonaws.com/swagger-ui/index.html)
 
-##If you want to launch application locally
+## If you want to launch application locally
 ### Prerequirements
 
 1. Java
