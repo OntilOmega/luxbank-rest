@@ -31,5 +31,5 @@ cd luxbank-rest
 ```
 4. Run the script (git pull, maven package, docker compose):
 ```
-run.sh
+./run.sh
 ```
