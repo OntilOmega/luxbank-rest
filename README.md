@@ -39,7 +39,7 @@ http://localhost:8000
 Application is up and running on Internet in AWS EC2 instance on address:
 
 
-Scripts to initialize the database are in the project resources folder and run automatically by Spring boot when project starts.
+Scripts to initialize the database are in the project [resources](src/main/resources) folder and run automatically by Spring boot when project starts.
  - [schema.sql](src/main/resources/schema.sql)
  - [data.sql](src/main/resources/data.sql)
 
