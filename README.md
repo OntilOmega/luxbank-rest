@@ -29,3 +29,7 @@ git clone https://github.com/OntilOmega/luxbank-rest.git
 ```
 cd luxbank-rest
 ```
+4. Run the script (git pull, maven package, docker compose):
+```
+run.sh
+```
