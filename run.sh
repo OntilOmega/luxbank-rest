@@ -1,3 +1,3 @@
 git pull
-./mvnw package
+./mvnw package -DskipTests
 docker compose up
