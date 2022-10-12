@@ -20,3 +20,7 @@ Scripts to initialize the database are in the project resources folder and run a
 ```
 git clone https://github.com/OntilOmega/luxbank-rest.git 
 ```
+3. Enter the project directory:
+```
+cd luxbank-rest
+```
