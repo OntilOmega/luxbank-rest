@@ -1,17 +1,6 @@
 LuxBank REST Api v 1.0.0
 ====
 
-### All main requirements have been done
-
-### All optional requirements have been done
-
-Application is up and running on Internet in AWS EC2 instance on address:
-
-
-Scripts to initialize the database are in the project resources folder and run automatically by Spring boot when project starts.
- - [schema.sql](src/main/resources/schema.sql)
- - [data.sql](src/main/resources/data.sql)
-
 ### Prerequirements
 
 1. Java
@@ -41,3 +30,16 @@ http://localhost:8000/swagger-ui/index.html
 
 ### REST entry point is:
 http://localhost:8000
+
+
+### All main requirements have been done
+
+### All optional requirements have been done
+
+Application is up and running on Internet in AWS EC2 instance on address:
+
+
+Scripts to initialize the database are in the project resources folder and run automatically by Spring boot when project starts.
+ - [schema.sql](src/main/resources/schema.sql)
+ - [data.sql](src/main/resources/data.sql)
+
