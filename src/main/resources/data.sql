@@ -1,3 +1,10 @@
+truncate table users cascade;
+truncate table accounts cascade;
+truncate table payments cascade;
+truncate table balances;
+truncate table account_balance;
+truncate table fraud_attempts;
+
 -- add test users
 INSERT INTO public.users (id, name, created_date, modified_date, password, address)
 VALUES ('7f395f1c-de79-4254-aee6-d226c70c8527', 'test1', '2022-10-10 21:49:54.075009', '2022-10-10 21:49:54.075009',

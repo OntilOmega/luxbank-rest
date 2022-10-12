@@ -1,1 +1,1 @@
-truncate table payments;
+truncate table payments cascade;

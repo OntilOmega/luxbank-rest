@@ -4,7 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 class OpenIbanClientTest {
@@ -15,15 +16,15 @@ class OpenIbanClientTest {
 
     @Test
     void isIbanValid() {
-        assertEquals(true, openIbanClient.isIbanValid("LU280019400644750000"));
-        assertEquals(true, openIbanClient.isIbanValid("LU280019400644750000"));
-        assertEquals(true, openIbanClient.isIbanValid("LU280019400644750000"));
-        assertEquals(true, openIbanClient.isIbanValid("LU280019400644750000"));
+        assertTrue(openIbanClient.isIbanValid("LU280019400644750000"));
+        assertTrue(openIbanClient.isIbanValid("LU280019400644750000"));
+        assertTrue(openIbanClient.isIbanValid("LU280019400644750000"));
+        assertTrue(openIbanClient.isIbanValid("LU280019400644750000"));
 
     }
 
     @Test
     void isIbanNotValid() {
-        assertEquals(false, openIbanClient.isIbanValid("LU12001000123456@891"));
+        assertFalse(openIbanClient.isIbanValid("LU12001000123456@891"));
     }
 }

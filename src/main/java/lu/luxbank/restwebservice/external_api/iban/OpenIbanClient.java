@@ -2,7 +2,6 @@ package lu.luxbank.restwebservice.external_api.iban;
 
 import lombok.extern.log4j.Log4j2;
 import lu.luxbank.restwebservice.exeption.LuxBankGeneralException;
-import org.hibernate.annotations.Cache;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.*;
@@ -11,7 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 @Service
 @Log4j2
@@ -47,7 +47,7 @@ public class OpenIbanClient {
             throw new LuxBankGeneralException(HttpStatus.INTERNAL_SERVER_ERROR,
                     "Error was occurred when we try to access openiban API");
         }
-        return handleResponse(response.getBody());
+        return handleResponse(Objects.requireNonNull(response.getBody()));
 
     }
 
@@ -57,7 +57,7 @@ public class OpenIbanClient {
 
     private HttpHeaders composeHeaders() {
         HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         headers.setContentType(MediaType.APPLICATION_JSON);
         return headers;
     }

@@ -3,7 +3,6 @@ package lu.luxbank.restwebservice.model;
 import lombok.*;
 import lu.luxbank.restwebservice.model.enums.Currency;
 
-import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
 @Setter

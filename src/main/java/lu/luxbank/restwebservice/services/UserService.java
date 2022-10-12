@@ -28,7 +28,7 @@ public class UserService {
             return ResponseEntity.notFound().build();
         }
         User user = userOptional.get();
-        if (!isUserPasswordValid(request.getCurrentPassword(), user)) {
+        if (isUserPasswordInvalid(request.getCurrentPassword(), user)) {
             log.info("Current password is not valid");
             return ResponseEntity.badRequest().build();
         }
@@ -40,10 +40,10 @@ public class UserService {
     }
 
 
-    public boolean isUserPasswordValid(String password, User user) {
+    public boolean isUserPasswordInvalid(String password, User user) {
         String usersEncodedPassword = user.getPassword();
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        return bCryptPasswordEncoder.matches(password, usersEncodedPassword);
+        return !bCryptPasswordEncoder.matches(password, usersEncodedPassword);
     }
 
 }

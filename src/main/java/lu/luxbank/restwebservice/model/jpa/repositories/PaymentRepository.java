@@ -1,8 +1,6 @@
 package lu.luxbank.restwebservice.model.jpa.repositories;
 
-import lu.luxbank.restwebservice.model.enums.Currency;
 import lu.luxbank.restwebservice.model.jpa.entities.Payment;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

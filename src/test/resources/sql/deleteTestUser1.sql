@@ -1,2 +1,9 @@
-delete from account_user where user_id='65c589be-625b-40d4-87a7-c89a67b82faf';
-delete from users where name='test1';
+delete
+from account_user
+where user_id = '7f395f1c-de79-4254-aee6-d226c70c8527';
+delete
+from fraud_attempts
+where user_id = '7f395f1c-de79-4254-aee6-d226c70c8527';
+delete
+from users
+where name = 'test1';

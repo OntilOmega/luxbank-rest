@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.extern.log4j.Log4j2;
 import lu.luxbank.restwebservice.AccountDto;
 import lu.luxbank.restwebservice.exeption.ExceptionInfo;
+import lu.luxbank.restwebservice.exeption.LuxBankGeneralException;
 import lu.luxbank.restwebservice.mappers.AccountMapper;
 import lu.luxbank.restwebservice.model.jpa.entities.User;
 import lu.luxbank.restwebservice.model.jpa.repositories.UserRepository;
@@ -22,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @Log4j2
@@ -60,15 +60,20 @@ public class AccountsController {
                     content = {
                             @Content(
                                     mediaType = "application/json",
-                                    schema = @Schema(implementation = AccountDto.class))})})
+                                    schema = @Schema(implementation = AccountDto.class))}),
+            @ApiResponse(responseCode = "404",
+                    description = "Accounts not found",
+                    content = @Content(schema = @Schema(hidden = true)))})
     @GetMapping(value = "")
     @ResponseStatus(HttpStatus.OK)
     public List<AccountDto> findAllAccounts(Principal user) {
-        Optional<User> userEntity = userRepository.findByName(user.getName());
-        return userEntity.get().getAccounts()
+        User userEntity = userRepository.findByName(user.getName()).get();
+        if (userEntity.getAccounts().isEmpty()) {
+            throw new LuxBankGeneralException(HttpStatus.NOT_FOUND, "Accounts not found");
+        }
+        return userEntity.getAccounts()
                 .stream()
                 .map(accountMapper::accountToAccountDto)
                 .toList();
-
     }
 }

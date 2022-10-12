@@ -98,7 +98,7 @@ public class AuthController {
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         Optional<User> user = userRepository.findByName(loginRequest.getName());
         if (user.isEmpty() ||
-                !userService.isUserPasswordValid(loginRequest.getPassword(), user.get())) {
+                userService.isUserPasswordInvalid(loginRequest.getPassword(), user.get())) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         return ResponseEntity.ok().body(jwtTokenUtils.generateToken(user.get()));

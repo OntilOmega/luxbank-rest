@@ -1,6 +1,5 @@
 package lu.luxbank.restwebservice.controllers;
 
-import lu.luxbank.restwebservice.exeption.ExceptionInfo;
 import lu.luxbank.restwebservice.model.jpa.entities.User;
 import lu.luxbank.restwebservice.security.JwtTokenUtils;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +15,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 @SpringBootTest
@@ -73,7 +72,7 @@ class UsersControllerTest {
                 .accept(MediaType.APPLICATION_JSON_VALUE)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .header("Authorization", "Bearer " + jwtToken)
-                .content("{\"currentPassword\":\"test1@Password\",\"newPassword\":\"US64SVBKUS6S3300958879\",\"address\":\"New Address from user1\"}");
+                .content("{\"currentPassword\":\"test1@password\",\"newPassword\":\"US64SVBKUS6S3300958879\",\"address\":\"New Address from user1\"}");
 
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
         assertEquals(200, result.getResponse().getStatus());

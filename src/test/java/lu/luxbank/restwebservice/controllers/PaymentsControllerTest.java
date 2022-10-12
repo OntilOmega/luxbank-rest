@@ -1,10 +1,10 @@
 package lu.luxbank.restwebservice.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import lu.luxbank.restwebservice.exeption.ExceptionInfo;
 import lu.luxbank.restwebservice.model.jpa.entities.User;
 import lu.luxbank.restwebservice.security.JwtTokenUtils;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,7 +15,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -52,7 +52,6 @@ class PaymentsControllerTest {
                 .content("{\"giverAccount\":\"DE89370400440532013000\",\"beneficiaryAccount\":\"US64SVBKUS6S3300958879\",\"amount\":1.55,\"currency\":\"EUR\",\"beneficiaryName\":\"Beneficiary name\"}");
 
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-        String contentAsString = result.getResponse().getContentAsString();
         assertEquals(400, result.getResponse().getStatus());
     }
 
@@ -74,12 +73,11 @@ class PaymentsControllerTest {
                 .content("{\"giverAccount\":\"DE89370400440532013000\",\"beneficiaryAccount\":\"DE89370400440532013000\",\"amount\":0.1,\"currency\":\"EUR\",\"beneficiaryName\":\"Beneficiary name\"}");
 
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-        String contentAsString = result.getResponse().getContentAsString();
         assertEquals(400, result.getResponse().getStatus());
     }
 
     @Test
-    @DisplayName("Payment from the account with low balance")
+    @DisplayName("Giver account is blocked")
     @Sql(scripts = {"/sql/deleteTestUser1.sql",
             "/sql/addTestUser1.sql",
             "/sql/deleteTestAccount1.sql",
@@ -96,7 +94,6 @@ class PaymentsControllerTest {
                 .content("{\"giverAccount\":\"DE89370400440532013000\",\"beneficiaryAccount\":\"US64SVBKUS6S3300958879\",\"amount\":100.0,\"currency\":\"EUR\",\"beneficiaryName\":\"Beneficiary name\"}");
 
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-        String contentAsString = result.getResponse().getContentAsString();
         assertEquals(400, result.getResponse().getStatus());
     }
 
@@ -107,11 +104,9 @@ class PaymentsControllerTest {
             "/sql/addTestUser1.sql",
             "/sql/deleteTestAccount1.sql",
             "/sql/addTestAccount1.sql",
-            "/sql/assignAccount1ToZeroEURBalance.sql",
             "/sql/assignAccount1ToUser1.sql",
             "/sql/deleteTestAccount2.sql",
             "/sql/addTestAccount2.sql",
-            "/sql/assignAccount2ToZeroEURBalance.sql"
     })
     void payment_paymentBeneficiaryGiverCurrenciesTheSame() throws Exception {
         RequestBuilder requestBuilder = MockMvcRequestBuilders.post(
@@ -122,7 +117,6 @@ class PaymentsControllerTest {
                 .content("{\"giverAccount\":\"DE89370400440532013000\",\"beneficiaryAccount\":\"US64SVBKUS6S3300958879\",\"amount\":100.0,\"currency\":\"USD\",\"beneficiaryName\":\"Beneficiary name\"}");
 
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-        String contentAsString = result.getResponse().getContentAsString();
         assertEquals(400, result.getResponse().getStatus());
     }
 
@@ -134,10 +128,8 @@ class PaymentsControllerTest {
             "/sql/deleteTestAccount1.sql",
             "/sql/addTestAccount1.sql",
             "/sql/assignAccount1ToUser1.sql",
-            "/sql/assignAccount1ToZeroEURBalance.sql",
             "/sql/deleteTestAccount2.sql",
             "/sql/addTestAccount2.sql",
-            "/sql/assignAccount2ToZeroEURBalance.sql"
     })
     void payment_lowBalance() throws Exception {
         RequestBuilder requestBuilder = MockMvcRequestBuilders.post(
@@ -145,10 +137,9 @@ class PaymentsControllerTest {
                 .accept(MediaType.APPLICATION_JSON_VALUE)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .header("Authorization", "Bearer " + jwtToken)
-                .content("{\"giverAccount\":\"DE89370400440532013000\",\"beneficiaryAccount\":\"US64SVBKUS6S3300958879\",\"amount\":100.0,\"currency\":\"EUR\",\"beneficiaryName\":\"Beneficiary name\"}");
+                .content("{\"giverAccount\":\"DE89370400440532013000\",\"beneficiaryAccount\":\"US64SVBKUS6S3300958879\",\"amount\":1000.0,\"currency\":\"EUR\",\"beneficiaryName\":\"Beneficiary name\"}");
 
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-        String contentAsString = result.getResponse().getContentAsString();
         assertEquals(400, result.getResponse().getStatus());
     }
 
@@ -164,7 +155,6 @@ class PaymentsControllerTest {
                 .content("{\"giverAccount\":\"DE89370400440532013000\",\"beneficiaryAccount\":\"LU280019400644750000\",\"amount\":100.0,\"currency\":\"EUR\",\"beneficiaryName\":\"Beneficiary name\"}");
 
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-        String contentAsString = result.getResponse().getContentAsString();
         assertEquals(400, result.getResponse().getStatus());
     }
 
@@ -180,7 +170,6 @@ class PaymentsControllerTest {
                 .content("{\"giverAccount\":\"DE89370400440532013000\",\"beneficiaryAccount\":\"LU2800194006447500001\",\"amount\":100.0,\"currency\":\"EUR\",\"beneficiaryName\":\"Beneficiary name\"}");
 
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-        String contentAsString = result.getResponse().getContentAsString();
         assertEquals(400, result.getResponse().getStatus());
     }
 
@@ -192,11 +181,9 @@ class PaymentsControllerTest {
             "/sql/deleteTestAccount1.sql",
             "/sql/addTestAccount1.sql",
             "/sql/assignAccount1ToUser1.sql",
-            "/sql/assignAccount1ToZeroEURBalance.sql",
+            "/sql/assignAccount1Balance1000EUR.sql",
             "/sql/deleteTestAccount2.sql",
             "/sql/addTestAccount2.sql",
-            "/sql/assignAccount2ToZeroEURBalance.sql",
-            "/sql/assignAccount1Balance1000EUR.sql",
     })
     void createPayment() throws Exception {
         RequestBuilder requestBuilder = MockMvcRequestBuilders.post(
@@ -213,6 +200,9 @@ class PaymentsControllerTest {
 
     @Test
     @DisplayName("List all payments ordered by creation date")
+    @Sql({"/sql/deleteAllPayments.sql",
+            "/sql/addPaymentUser1.sql",
+    })
     void listAllPayments() throws Exception {
         RequestBuilder requestBuilder = MockMvcRequestBuilders.get(
                         "/api/v1/payments")
@@ -228,9 +218,12 @@ class PaymentsControllerTest {
 
     @Test
     @DisplayName("List all payments to given beneficiary and period")
+    @Sql({"/sql/deleteAllPayments.sql",
+            "/sql/addPaymentUser1.sql",
+    })
     void listAllPaymentsByBeneficiary() throws Exception {
         RequestBuilder requestBuilder = MockMvcRequestBuilders.get(
-                        "/api/v1/payments/US64SVBKUS6S3300958879?dateFrom=2022-01-04&dateTo=2023-10-04")
+                        "/api/v1/payments/beneficiary/US64SVBKUS6S3300958879?dateFrom=2022-01-04&dateTo=2022-10-10")
                 .accept(MediaType.APPLICATION_JSON_VALUE)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .header("Authorization", "Bearer " + jwtToken);
@@ -243,7 +236,12 @@ class PaymentsControllerTest {
 
     @Test
     @DisplayName("Delete payment")
-    @Sql({"/sql/deleteAllPayments.sql",
+    @Sql({"/sql/deleteTestUser1.sql",
+            "/sql/deleteTestAccount1.sql",
+            "/sql/addTestUser1.sql",
+            "/sql/addTestAccount1.sql",
+            "/sql/assignAccount1ToUser1.sql",
+            "/sql/deleteAllPayments.sql",
             "/sql/addPaymentUser1.sql",
     })
     void deletePayment() throws Exception {
