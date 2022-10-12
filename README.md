@@ -33,3 +33,11 @@ cd luxbank-rest
 ```
 ./run.sh
 ```
+
+
+### Swagger
+
+http://localhost:8000/swagger-ui/index.html
+
+### REST entry point is:
+http://localhost:8000
