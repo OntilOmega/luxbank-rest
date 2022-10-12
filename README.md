@@ -37,6 +37,9 @@ http://localhost:8000
 ### All optional requirements have been done
 
 Also, the application is up and running on Internet in AWS EC2 instance on address:
+- [API](http://ec2-52-41-94-64.us-west-2.compute.amazonaws.com)
+- [Swagger](http://ec2-52-41-94-64.us-west-2.compute.amazonaws.com/swagger-ui/index.html)
+
 
 
 Scripts to initialize the database are in the project [resources](src/main/resources) folder and run automatically by Spring boot when project starts.
