@@ -43,3 +43,4 @@ Scripts to initialize the database are in the project [resources](src/main/resou
  - [schema.sql](src/main/resources/schema.sql)
  - [data.sql](src/main/resources/data.sql)
 
+
