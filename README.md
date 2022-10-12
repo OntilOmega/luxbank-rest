@@ -36,7 +36,7 @@ http://localhost:8000
 
 ### All optional requirements have been done
 
-Application is up and running on Internet in AWS EC2 instance on address:
+Also, the application is up and running on Internet in AWS EC2 instance on address:
 
 
 Scripts to initialize the database are in the project [resources](src/main/resources) folder and run automatically by Spring boot when project starts.
