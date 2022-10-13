@@ -12,6 +12,7 @@ import lu.luxbank.restwebservice.exeption.ExceptionInfo;
 import lu.luxbank.restwebservice.model.PaymentRequest;
 import lu.luxbank.restwebservice.model.ValidatedPayment;
 import lu.luxbank.restwebservice.model.dtos.PaymentDto;
+import lu.luxbank.restwebservice.model.jpa.entities.Account;
 import lu.luxbank.restwebservice.services.AntiFraudService;
 import lu.luxbank.restwebservice.services.PaymentService;
 import lu.luxbank.restwebservice.services.ValidatePaymentService;
@@ -153,8 +154,7 @@ public class PaymentsController {
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateFrom,
 
             @Parameter(description = "Search end date",
-                    example = "2022-10-01")
-            @PastOrPresent
+                    example = "2022-12-31")
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateTo,
             @Parameter(example = """
                     {
