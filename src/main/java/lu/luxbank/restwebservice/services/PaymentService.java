@@ -115,7 +115,7 @@ public class PaymentService {
                         username,
                         beneficiaryAccountNumber,
                         LocalDateTime.from(dateFrom.atStartOfDay()),
-                        LocalDateTime.from(dateTo.atStartOfDay()),
+                        LocalDateTime.from(dateTo.atStartOfDay().plusDays(1)),
                         pageable)
                 .stream()
                 .map(paymentMapper::paymentToPaymentDto)

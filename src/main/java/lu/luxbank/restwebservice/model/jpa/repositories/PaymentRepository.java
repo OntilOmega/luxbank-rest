@@ -23,7 +23,7 @@ public interface PaymentRepository extends JpaRepository<Payment, UUID> {
                    users.name = :name
                and p.beneficiaryAccountNumber = :beneficiaryAccountNumber
                and p.createdDate >= :dateFrom
-               and p.createdDate <= :dateTo
+               and p.createdDate < :dateTo
                """)
     List<Payment> findByGiverAccountAndPeriod(
             @Param("name") String username,
