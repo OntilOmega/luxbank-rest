@@ -28,7 +28,7 @@ cd luxbank-rest
 ```
 4. Maven package:
 ```
-./mvnw package
+./mvnw package -DskipTests
 ```
 5. Docker compose up:
 ```
