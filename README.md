@@ -5,8 +5,8 @@ LuxBank REST Api v 1.0.0
 ### All optional requirements have been done
 
 The application is already up and running on Internet in AWS EC2 instance on address:
-- [API](http://ec2-52-41-94-64.us-west-2.compute.amazonaws.com)
-- [Swagger](http://ec2-52-41-94-64.us-west-2.compute.amazonaws.com/swagger-ui/index.html)
+- [API](http://ec2-18-236-142-88.us-west-2.compute.amazonaws.com/)
+- [Swagger](http://ec2-18-236-142-88.us-west-2.compute.amazonaws.com/swagger-ui/index.html)
 
 ## If you want to launch application locally
 ### Prerequirements
