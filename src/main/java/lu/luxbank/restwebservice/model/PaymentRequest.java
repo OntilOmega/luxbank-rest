@@ -29,7 +29,7 @@ public class PaymentRequest {
     private String beneficiaryAccount;
 
     @DecimalMin(value = "0.01")
-    @Schema(description = "Payment amount", example = "100.00")
+    @Schema(description = "Payment amount", example = "10.00")
     private BigDecimal amount;
 
     @NotNull
