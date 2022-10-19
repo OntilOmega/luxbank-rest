@@ -1,4 +1,4 @@
-package lu.luxbank.restwebservice;
+package lu.luxbank.restwebservice.model.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

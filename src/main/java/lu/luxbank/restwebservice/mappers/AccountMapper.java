@@ -1,6 +1,6 @@
 package lu.luxbank.restwebservice.mappers;
 
-import lu.luxbank.restwebservice.AccountDto;
+import lu.luxbank.restwebservice.model.dtos.AccountDto;
 import lu.luxbank.restwebservice.model.jpa.entities.Account;
 import org.mapstruct.*;
 

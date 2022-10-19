@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.extern.log4j.Log4j2;
-import lu.luxbank.restwebservice.AccountDto;
+import lu.luxbank.restwebservice.model.dtos.AccountDto;
 import lu.luxbank.restwebservice.exeption.ExceptionInfo;
 import lu.luxbank.restwebservice.exeption.LuxBankGeneralException;
 import lu.luxbank.restwebservice.mappers.AccountMapper;
