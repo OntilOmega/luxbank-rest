@@ -13,7 +13,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 @Log4j2
 public class CachingConfig {
 
-    @Scheduled(cron = "0 0 * * * *")
+    @Scheduled(cron = "0 0 0 * * *")
     @CacheEvict(value = "openIban", allEntries = true)
     public void evictOpenIbanCachesAtMidnight() {
         log.info("openIban cache has been evicted");
